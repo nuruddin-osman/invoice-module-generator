@@ -19,8 +19,6 @@ const ExportButton = ({ template, invoiceData }) => {
 
     pdf.addImage(imgData, "PNG", positionX, positionY, imgWidth, imgHeight);
     verticalHeight -= pageHeight;
-    console.log(pageHeight);
-    console.log((verticalHeight -= pageHeight));
 
     while (verticalHeight >= 0) {
       positionY = verticalHeight - imgHeight;

@@ -7,15 +7,15 @@ const initialState = {
     invoiceNumber: "INV-001",
     date: new Date().toLocaleDateString("en-GB").replace(/\//g, "-"),
     from: {
-      companyName: "Your Company Name",
-      address: "123 Company St, City, Country",
-      email: "company@example.com",
-      phone: "+1234567890",
+      companyName: "Nuruddin Ltd",
+      address: "Mohakhali, dhaka-1215",
+      email: "mdnuruddinosman@gamil.com",
+      phone: "+8801641657427",
     },
     to: {
-      clientName: "Client Name",
-      address: "456 Client St, City, Country",
-      email: "client@example.com",
+      clientName: "Betopia Groupe",
+      address: "Banasree, Dhaka-1219",
+      email: "betopia@example.com",
       phone: "+0987654321",
     },
     items: [
@@ -24,7 +24,6 @@ const initialState = {
         name: "Web Development",
         quantity: 1,
         unitPrice: 1000,
-        total: 1000,
       },
     ],
     subtotal: 1000,
@@ -142,6 +141,8 @@ function invoiceReducer(state, action) {
 
     case "UPDATE_TAX_RATE":
       const taxRate = action.payload;
+      console.log(action.payload);
+
       const tax = state.invoiceData.subtotal * (taxRate / 100);
 
       return {

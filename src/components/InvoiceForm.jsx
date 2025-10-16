@@ -39,6 +39,19 @@ const InvoiceForm = ({ invoiceData, dispatch }) => {
     });
   };
 
+  const timestamp = Date.now()
+    .toString()
+    .split("")
+    .reverse()
+    .join("")
+    .slice(0, 6);
+  const handleCreateInvoiceNum = () => {
+    dispatch({
+      type: "UPDATE_FIELD",
+      payload: { field: "invoiceNumber", value: `INV-${timestamp}` },
+    });
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-lg md:text-2xl font-bold mb-3 md:mb-6">
@@ -67,17 +80,9 @@ const InvoiceForm = ({ invoiceData, dispatch }) => {
           <label className="block text-sm font-medium mb-1">
             Invoice Number
           </label>
-          <input
-            type="text"
-            value={invoiceData.invoiceNumber}
-            onChange={(e) =>
-              dispatch({
-                type: "UPDATE_FIELD",
-                payload: { field: "invoiceNumber", value: e.target.value },
-              })
-            }
-            className="inputCommonClass"
-          />
+          <button onClick={handleCreateInvoiceNum} className="inputCommonClass">
+            Press for invoice number
+          </button>
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Invoice Date</label>
