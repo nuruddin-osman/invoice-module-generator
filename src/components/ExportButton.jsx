@@ -12,18 +12,21 @@ const ExportButton = ({ template, invoiceData }) => {
     const imgWidth = 210;
     const pageHeight = 295;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
+    let verticalHeight = imgHeight;
 
-    let position = 0;
+    let positionX = 0;
+    let positionY = 0;
 
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
+    pdf.addImage(imgData, "PNG", positionX, positionY, imgWidth, imgHeight);
+    verticalHeight -= pageHeight;
+    console.log(pageHeight);
+    console.log((verticalHeight -= pageHeight));
 
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
+    while (verticalHeight >= 0) {
+      positionY = verticalHeight - imgHeight;
       pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      pdf.addImage(imgData, "PNG", positionX, positionY, imgWidth, imgHeight);
+      verticalHeight -= pageHeight;
     }
 
     pdf.save(`invoice-${invoiceData.invoiceNumber}.pdf`);
