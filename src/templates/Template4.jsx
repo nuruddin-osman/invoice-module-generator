@@ -3,7 +3,7 @@ import { IoCall } from "react-icons/io5";
 import { CgMail } from "react-icons/cg";
 import { CgNotes } from "react-icons/cg";
 
-export default function Template4({ invoiceData }) {
+const Template4 = ({ invoiceData }) => {
   const colors = {
     background: "#EBEBEB",
     secondary: "#FFFFFF",
@@ -15,7 +15,7 @@ export default function Template4({ invoiceData }) {
   return (
     <div className="p-3" style={{ backgroundColor: colors.background }}>
       <div className="max-w-4xl mx-auto">
-        {/* Modern Header with gradient */}
+        {/*  Header with gradient */}
         <div className="rounded-xl overflow-hidden shadow-xl mb-3">
           <div
             className="p-2 text-white"
@@ -43,7 +43,7 @@ export default function Template4({ invoiceData }) {
           </div>
         </div>
 
-        {/* From/To Section - Modern Cards */}
+        {/* From/To Section - Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
           <div
             className="p-3 rounded-xl shadow-lg"
@@ -112,8 +112,8 @@ export default function Template4({ invoiceData }) {
           </div>
         </div>
 
-        {/* Items Table - Modern Design */}
-        <div className="bg-white rounded-md shadow-lg overflow-hidden mb-3">
+        {/* Items Table for desktop */}
+        <div className="bg-white rounded-md shadow-lg overflow-hidden mb-3 hidden md:block">
           <div className="p-2" style={{ backgroundColor: colors.primary }}>
             <h3 className="text-lg font-bold text-white text-center">
               Items & Services
@@ -173,7 +173,38 @@ export default function Template4({ invoiceData }) {
           </div>
         </div>
 
-        {/* Summary Section - Modern Design */}
+        {/* Items Cards - Mobile */}
+        <div className="mb-4 md:hidden space-y-2">
+          {invoiceData.items.map((item, index) => (
+            <div
+              key={item.id}
+              className="p-4 rounded-lg border"
+              style={{
+                backgroundColor: colors.primary,
+                borderColor: colors.secondary,
+              }}
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-700">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">
+                    ${item.quantity * item.unitPrice}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    ${item.unitPrice} each
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Summary Section */}
         <div
           className={`grid grid-cols-1 gap-3 ${
             invoiceData.notes ? "lg:grid-cols-[1fr_2fr]" : "lg:grid-cols-1"
@@ -181,7 +212,7 @@ export default function Template4({ invoiceData }) {
         >
           {/* Notes Section */}
           {invoiceData.notes && (
-            <div className="bg-white rounded-md shadow-lg p-3">
+            <div className="bg-white rounded-md shadow-lg p-3 order-2 md:order-1">
               <h4 className="text-base font-bold mb-1 flex items-center gap-2">
                 <span style={{ color: colors.primary }}>
                   <CgNotes />
@@ -195,7 +226,7 @@ export default function Template4({ invoiceData }) {
           )}
 
           {/* Totals Section */}
-          <div className="bg-white rounded-md shadow-lg p-3">
+          <div className="bg-white rounded-md shadow-lg p-3 order-1 md:order-2">
             <h4
               className="text-lg font-bold mb-2 text-center"
               style={{ color: colors.primary }}
@@ -268,4 +299,5 @@ export default function Template4({ invoiceData }) {
       </div>
     </div>
   );
-}
+};
+export default Template4;

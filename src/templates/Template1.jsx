@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Template1({ invoiceData }) {
+const Template1 = ({ invoiceData }) => {
   const colors = {
     background: "#F5EFE6",
     secondary: "#E8DFCA",
@@ -18,22 +18,24 @@ export default function Template1({ invoiceData }) {
         >
           <div>
             <h1
-              className="text-3xl font-bold"
+              className="text-lg md:text-3xl font-bold leading-5"
               style={{ color: colors.primary }}
             >
               {invoiceData.invoiceTitle}
             </h1>
-            <p className="text-lg" style={{ color: colors.primary }}>
+            <p className="text-sm md:text-lg" style={{ color: colors.primary }}>
               #{invoiceData.invoiceNumber}
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-lg font-semibold">Date: {invoiceData.date}</p>
+          <div className="text-right ">
+            <p className=" font-semibold text-xs md:text-base">
+              Date: {invoiceData.date}
+            </p>
           </div>
         </div>
 
-        {/* From/To Section */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        {/* From/To Section cards*/}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
           <div
             className="p-4 rounded-lg"
             style={{ backgroundColor: colors.accent }}
@@ -60,8 +62,8 @@ export default function Template1({ invoiceData }) {
           </div>
         </div>
 
-        {/* Items Table */}
-        <div className="mb-4">
+        {/* Items Table for Desktop */}
+        <div className="mb-4 hidden md:block">
           <table className="w-full border-collapse">
             <thead>
               <tr style={{ backgroundColor: colors.primary }}>
@@ -75,7 +77,6 @@ export default function Template1({ invoiceData }) {
               {invoiceData.items.map((item, index) => (
                 <tr
                   key={item.id}
-                  className={index % 2 === 0 ? "" : ""}
                   style={{
                     backgroundColor:
                       index % 2 === 0 ? colors.accent : colors.secondary,
@@ -93,7 +94,39 @@ export default function Template1({ invoiceData }) {
           </table>
         </div>
 
-        {/* Totals */}
+        {/* Items Cards for Mobile */}
+        <div className="mb-4 md:hidden space-y-2">
+          {invoiceData.items.map((item, index) => (
+            <div
+              key={item.id}
+              className="p-4 rounded-lg border"
+              style={{
+                backgroundColor:
+                  index % 2 === 0 ? colors.accent : colors.secondary,
+                borderColor: colors.primary,
+              }}
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-600">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">
+                    ${item.quantity * item.unitPrice}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    ${item.unitPrice} each
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Totals summary*/}
         <div className="flex justify-end">
           <div className="w-64">
             <div className="flex justify-between p-2">
@@ -129,4 +162,6 @@ export default function Template1({ invoiceData }) {
       </div>
     </div>
   );
-}
+};
+
+export default Template1;

@@ -2,7 +2,7 @@ import React from "react";
 import DatePickers from "../utils/DatePickers";
 import { IoMdClose } from "react-icons/io";
 
-export default function InvoiceForm({ invoiceData, dispatch }) {
+const InvoiceForm = ({ invoiceData, dispatch }) => {
   const handleFromChange = (field, value) => {
     dispatch({
       type: "UPDATE_FROM_FIELD",
@@ -41,7 +41,9 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">Invoice Details</h2>
+      <h2 className="text-lg md:text-2xl font-bold mb-3 md:mb-6">
+        Invoice Details
+      </h2>
 
       {/* Basic Information */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -174,11 +176,8 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
         </div>
 
         {invoiceData.items.map((item, index) => (
-          <div
-            key={item.id}
-            className="grid grid-cols-12 gap-2 mb-2 items-center"
-          >
-            <div className="col-span-5">
+          <div key={item.id} className="flex flex-wrap gap-2 mb-2 items-center">
+            <div className="w-full sm:w-[48%] lg:w-2/5">
               <input
                 type="text"
                 placeholder="Item name"
@@ -189,7 +188,7 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
                 className="inputCommonClass"
               />
             </div>
-            <div className="col-span-2">
+            <div className="w-[48%] sm:w-[23%] lg:w-[10%]">
               <input
                 type="number"
                 placeholder="Qty"
@@ -204,7 +203,7 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
                 className="inputCommonClass"
               />
             </div>
-            <div className="col-span-2">
+            <div className="w-[48%] sm:w-[23%] lg:w-[15%]">
               <input
                 type="number"
                 placeholder="Unit Price"
@@ -219,12 +218,12 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
                 className="inputCommonClass"
               />
             </div>
-            <div className="col-span-2 ">
+            <div className="w-[48%] sm:w-[23%] lg:w-[18%]">
               <div className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-center">
                 {(item.quantity * item.unitPrice).toFixed(2)}
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="w-[48%] sm:w-[23%] lg:w-[10%] text-right">
               <button
                 onClick={() => removeItem(item.id)}
                 className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-2xl px-3 py-2 text-center transition-all duration-500"
@@ -264,4 +263,6 @@ export default function InvoiceForm({ invoiceData, dispatch }) {
       </div>
     </div>
   );
-}
+};
+
+export default InvoiceForm;

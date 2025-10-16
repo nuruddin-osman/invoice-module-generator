@@ -2,7 +2,7 @@ import React from "react";
 import { IoCall } from "react-icons/io5";
 import { CgMail } from "react-icons/cg";
 
-export default function Template3({ invoiceData }) {
+const Template3 = ({ invoiceData }) => {
   const colors = {
     background: "#F9F5F0",
     secondary: "#F2EAD3",
@@ -13,7 +13,7 @@ export default function Template3({ invoiceData }) {
   return (
     <div className="p-4" style={{ backgroundColor: colors.background }}>
       <div className="max-w-4xl mx-auto">
-        {/* Header with elegant design */}
+        {/* Header section */}
         <div className="text-center mb-4">
           <div className="inline-block  rounded-full">
             <h1
@@ -25,7 +25,7 @@ export default function Template3({ invoiceData }) {
           </div>
           <div className="flex justify-center items-center gap-6 mt-2">
             <div
-              className="text-lg font-semibold"
+              className="text-sm md:text-lg font-semibold"
               style={{ color: colors.accent }}
             >
               Invoice:{" "}
@@ -36,7 +36,7 @@ export default function Template3({ invoiceData }) {
               style={{ backgroundColor: colors.primary }}
             ></div>
             <div
-              className="text-lg font-semibold"
+              className="text-sm md:text-lg font-semibold"
               style={{ color: colors.accent }}
             >
               Date: {invoiceData.date}
@@ -44,7 +44,7 @@ export default function Template3({ invoiceData }) {
           </div>
         </div>
 
-        {/* From/To Section - Side by side cards */}
+        {/* From/To Section  cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
           <div
             className="p-3 rounded-xl shadow-lg"
@@ -127,8 +127,8 @@ export default function Template3({ invoiceData }) {
           </div>
         </div>
 
-        {/* Items Table - Modern Design */}
-        <div className="mb-3 overflow-hidden rounded-lg shadow-lg">
+        {/* Items Table for desktop */}
+        <div className="mb-3 overflow-hidden rounded-lg shadow-lg hidden md:block">
           <div className="p-2" style={{ backgroundColor: colors.primary }}>
             <h3 className="text-lg font-bold text-white text-center">
               Invoice Items
@@ -190,8 +190,38 @@ export default function Template3({ invoiceData }) {
             </tbody>
           </table>
         </div>
+        {/* Items Cards for Mobile */}
+        <div className="mb-4 md:hidden space-y-2">
+          {invoiceData.items.map((item, index) => (
+            <div
+              key={item.id}
+              className="p-4 rounded-lg border"
+              style={{
+                backgroundColor: colors.primary,
+                borderColor: colors.secondary,
+              }}
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-700">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">
+                    ${item.quantity * item.unitPrice}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    ${item.unitPrice} each
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        {/* Totals Section - Elegant Design */}
+        {/* Totals summary Section  */}
         <div className="flex justify-end mb-3">
           <div className="w-full md:w-96">
             <div className="rounded-lg overflow-hidden shadow-lg">
@@ -285,4 +315,6 @@ export default function Template3({ invoiceData }) {
       </div>
     </div>
   );
-}
+};
+
+export default Template3;

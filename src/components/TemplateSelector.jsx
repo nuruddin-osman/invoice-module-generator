@@ -27,10 +27,7 @@ const templates = [
   },
 ];
 
-export default function TemplateSelector({
-  selectedTemplate,
-  onTemplateSelect,
-}) {
+const TemplateSelector = ({ selectedTemplate, onTemplateSelect }) => {
   return (
     <div className="mb-6 bg-[#DEDED1] p-6 rounded-md">
       <h2 className="text-xl font-bold mb-4">Choose a Template</h2>
@@ -38,7 +35,7 @@ export default function TemplateSelector({
         {templates.map((template) => (
           <div
             key={template.id}
-            className={`cursor-pointer rounded-lg p-3 transition-all duration-300 ${
+            className={`cursor-pointer rounded-lg p-1.5 md:p-3 transition-all duration-300 ${
               selectedTemplate === template.id
                 ? "ring-2 ring-blue-500 ring-offset-1 transform scale-105"
                 : "hover:shadow-lg"
@@ -46,10 +43,10 @@ export default function TemplateSelector({
             onClick={() => onTemplateSelect(template.id)}
           >
             <div
-              className={`h-32 rounded-md ${template.preview} flex items-center justify-center`}
+              className={`md:h-32 p-2 rounded-md ${template.preview} flex items-center justify-center`}
             >
               <span
-                className="font-semibold"
+                className="font-semibold text-center"
                 style={{
                   color: template.colors[2],
                 }}
@@ -62,4 +59,6 @@ export default function TemplateSelector({
       </div>
     </div>
   );
-}
+};
+
+export default TemplateSelector;

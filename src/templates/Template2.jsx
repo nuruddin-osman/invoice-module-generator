@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Template2({ invoiceData }) {
+const Template2 = ({ invoiceData }) => {
   const colors = {
     background: "#19183B",
     secondary: "#708993",
@@ -14,7 +14,7 @@ export default function Template2({ invoiceData }) {
       style={{ backgroundColor: colors.background }}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
+        {/* Header section */}
         <div className="text-center mb-4">
           <h1
             className="text-4xl font-bold mb-2"
@@ -27,8 +27,8 @@ export default function Template2({ invoiceData }) {
           </p>
         </div>
 
-        {/* From/To Section */}
-        <div className="grid grid-cols-2 gap-6 mb-4">
+        {/* From/To Section cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
           <div
             className="p-3 rounded-lg"
             style={{ backgroundColor: colors.secondary }}
@@ -51,8 +51,8 @@ export default function Template2({ invoiceData }) {
           </div>
         </div>
 
-        {/* Items Table */}
-        <div className="mb-4">
+        {/* Items Table for desktop*/}
+        <div className="mb-4 hidden md:block">
           <table className="w-full border-collapse">
             <thead>
               <tr style={{ backgroundColor: colors.primary }}>
@@ -85,7 +85,38 @@ export default function Template2({ invoiceData }) {
           </table>
         </div>
 
-        {/* Totals */}
+        {/* Items Cards for Mobile */}
+        <div className="mb-4 md:hidden space-y-2">
+          {invoiceData.items.map((item, index) => (
+            <div
+              key={item.id}
+              className="p-4 rounded-lg border"
+              style={{
+                backgroundColor: colors.primary,
+                borderColor: colors.secondary,
+              }}
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-600">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">
+                    ${item.quantity * item.unitPrice}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    ${item.unitPrice} each
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Totals summary */}
         <div className="flex justify-end mb-4">
           <div className="w-80">
             <div
@@ -96,7 +127,7 @@ export default function Template2({ invoiceData }) {
               <span>${invoiceData.subtotal}</span>
             </div>
             <div
-              className="flex justify-between p-3 border-b"
+              className="flex justify-between p-3 border-b mb-2"
               style={{ borderColor: colors.primary }}
             >
               <span>Tax ({invoiceData.taxRate}%):</span>
@@ -128,4 +159,5 @@ export default function Template2({ invoiceData }) {
       </div>
     </div>
   );
-}
+};
+export default Template2;

@@ -2,7 +2,7 @@ import React from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-export default function ExportButton({ template, invoiceData }) {
+const ExportButton = ({ template, invoiceData }) => {
   const downloadPDF = async () => {
     const element = document.getElementById("invoice-preview");
     const canvas = await html2canvas(element, { scale: 2 });
@@ -37,4 +37,5 @@ export default function ExportButton({ template, invoiceData }) {
       Download PDF
     </button>
   );
-}
+};
+export default ExportButton;

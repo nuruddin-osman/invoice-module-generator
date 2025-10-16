@@ -4,7 +4,7 @@ import Template2 from "../templates/Template2";
 import Template3 from "../templates/Template3";
 import Template4 from "../templates/Template4";
 
-export default function InvoicePreview({ template, invoiceData }) {
+const InvoicePreview = ({ template, invoiceData }) => {
   const renderTemplate = () => {
     switch (template) {
       case "template1":
@@ -25,4 +25,6 @@ export default function InvoicePreview({ template, invoiceData }) {
       <div className="">{renderTemplate()}</div>
     </div>
   );
-}
+};
+
+export default InvoicePreview;
